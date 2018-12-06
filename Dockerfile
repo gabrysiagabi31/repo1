@@ -1,5 +1,5 @@
-FROM ubuntu:latest
-RUN apt-get update -y
-RUN apt-get install apache2 -y
-EXPOSE 80
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+FROM java:8
+COPY . /
+WORKDIR /
+RUN javac DockerConnectMySQL.java
+CMD ["java", "-classpath", "mysql-connector-java-8.0.13.jar:.","DockerConnectMySQL"]
