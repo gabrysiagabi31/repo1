@@ -17,29 +17,27 @@ public class DockerConnectMySQL {
                     conn = DriverManager.getConnection(DB_URL, USER, PASS);
                     connect = true;
                 } catch (Exception e) {
-                    System.out.println("Łączenie z serwerem bazy danych");
+                    System.out.println("Connecting to database...");
                     Thread.sleep(1000);
                 }
             } while (!connect);
-			System.out.println("Połączono z serwerem bazy danych");
+			System.out.println("Connect!!!");
             stmt = conn.createStatement();
             String sql;
             sql = "DROP TABLE IF EXISTS Persons";
             stmt.executeUpdate(sql);
             sql = "CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), City varchar(255) );";
             stmt.executeUpdate(sql);
-            sql = "INSERT INTO Persons(PersonID, LastName, FirstName, City) VALUES (1,'Komoda', 'Alfred', 'Lublin'),(2, 'Worsall', 'Raimund', 'Penambangan'),(3, 'Allcorn', 'Janie', 'Florencia');";
+            sql = "INSERT INTO Persons(PersonID, LastName, FirstName, City) VALUES (1,'Brzozowski', 'Rafał', 'Warszawa'),(2, 'Krawczyk', 'Krzysztof', 'Zakopane'),(3, 'Gessler', 'Magda', 'Grabina');";
             stmt.executeUpdate(sql);
             Scanner menu = new Scanner(System.in);
             String i;
             do {
                 System.out.println("");
-                System.out.println("menu od sql");
-                System.out.println("wpisz tylko liczbę");
-                System.out.println("wybierz opcje:");
-                System.out.println("(1) dodanie encji");
-                System.out.println("(2) wyświetlenie");
-                System.out.println("(3) wyjdz");
+                System.out.println("Wybierz opcje:");
+                System.out.println("(1) Dodaj encję");
+                System.out.println("(2) Wyświetl zawartość");
+                System.out.println("(3) Wyjdź");
                 i = (String) menu.next();
                 switch (i) {
                     case "1": {
@@ -53,17 +51,17 @@ public class DockerConnectMySQL {
                         rs.close();
                         e++;
                         sql = "INSERT INTO Persons (PersonID, LastName, FirstName, City) VALUES (" + e + ",'";
-                        System.out.println("Podaj Nazwisko:");
+                        System.out.println("Podaj nazwisko:");
                         sql += insert.nextLine();
                         sql += "', '";
-                        System.out.println("Podaj Imię:");
+                        System.out.println("Podaj imię:");
                         sql += insert.nextLine();
                         sql += "', '";
-                        System.out.println("Podaj Miasto:");
+                        System.out.println("Podaj miasto:");
                         sql += insert.nextLine();
                         sql += "');";
                         stmt.executeUpdate(sql);
-						System.out.println("Dodano encje");
+						System.out.println("Dodano encję");
                         break;
                     }
                     case "2": {
@@ -85,8 +83,8 @@ public class DockerConnectMySQL {
                         break;
                     }
                     default: {
-						System.out.println("");
-                        System.out.println("Wybierz odpowiednią opcje!");
+			System.out.println("");
+                        System.out.println("Wybrałeś złą opcję!");
                         break;
                     }
                 }
